@@ -244,7 +244,8 @@ function realTimeChart() {
 
 
     // initial invocation
-    data = initialData || [];
+    //data = initialData || [];
+    data = [];
 
     // update display
     refresh();

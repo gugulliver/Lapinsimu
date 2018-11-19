@@ -1,5 +1,6 @@
 var express = require('express')
 var app = express()
+var Parse = require('parse/node');
 var cors = require('cors')
 var url = require('url')
 var fs = require('fs');
@@ -11,17 +12,21 @@ app.get('/', function (req, res) {
   var query = url.parse(req.url,true);
 
   if  ( query.query['requestType'] == 'getdata' ) {
-	fs.readFile('test.json', {encoding: 'utf-8'}, function(err,data){
+	fs.readFile('min.txt', {encoding: 'utf-8'}, function(err,data){
+	//fs.readFile('test.json', {encoding: 'utf-8'}, function(err,data){
 	    if (!err) {
-		res.send({int :50}); 
+		//console.log(data)
+		allLines = data.splite('/\r?\n/g');
+		Line = allLines[1].splite('\t');
+		//res.send(Line[1]);
+		res.send(60);
 	    } else {
 		console.log(err);
 	    }});
   }
 })
- ////////////////////////
+ 
 
-app.listen(3000)
 
 /*
   if  ( query.query['requestType'] == 'injection' ) {
@@ -61,3 +66,5 @@ function manageInjection(query) {
   return(dataInjection);
 }
  */
+
+app.listen(3000)
