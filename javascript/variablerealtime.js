@@ -13,7 +13,7 @@ var timeScale = d3.scale.linear()
 // define value scale
 var valueScale = d3.scale.linear()
     .domain([0, 1])
-    .range([30, 95]);
+    .range([30, 130]);
 
 // generate initial data
 var normal = d3.random.normal(1000, 150);
@@ -23,6 +23,7 @@ var data = d3.range(300).map(function(d, i, arr) {
   //var value = valueScale(Math.random()); // random data
   var value = Math.round((d % 60) / 60 * 95); // ramp data
   var interval = Math.round(timeScale(normal()));
+  //var interval =500;
   currMs += interval;
   var time = new Date(currMs);
   var obj = { interval: interval, value: value, time: time, ts: currMs }
@@ -51,7 +52,6 @@ var chartDiv = d3.select("#viewDiv").append("div")
     .call(chart);
 
 // alternative invocation
-//chart(chartDiv); 
 
 
 // drive data into the chart roughly every second
@@ -83,12 +83,8 @@ function dataGenerator() {
       }
     }
 
-    //pressionA
     function mainboucle(valeur){
         var obj = {
-          //value: valueScale(Math.random()), // random data
-          //value: Math.round((d++ % 60) / 60 * 95), // ramp data
-
           //test premier, lecture d'une minute-lapin
           value: valeur,
           time: now,
@@ -103,7 +99,7 @@ function dataGenerator() {
     // do forever
     dataGenerator();
 
-  }, timeout);
+  }, 5);// timeout, le pas de temps est 5ms
 }
 
 // start the data generator
